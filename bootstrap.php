@@ -14,7 +14,7 @@ use Flarum\Statistics\Listener;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
-    (new Extend\addAssets('admin'))
+    (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js')
         ->css(__DIR__.'/less/admin.less'),
 
