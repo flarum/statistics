@@ -27,7 +27,12 @@
             "dev-master": "0.1.x-dev"
         },
         "flarum-extension": {
-            "title": "Statistics"
+            "title": "Statistics",
+             "icon": {
+                "name": "chart-bar",
+                "backgroundColor": "#ededed",
+                "color": "#5a5b5b"
+      }
         }
     }
 }
