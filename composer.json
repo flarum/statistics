@@ -29,7 +29,7 @@
         "flarum-extension": {
             "title": "Statistics",
              "icon": {
-                "name": "chart-bar",
+                "name": "fas fa-chart-bar",
                 "backgroundColor": "#ededed",
                 "color": "#5a5b5b"
       }
