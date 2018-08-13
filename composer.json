@@ -30,8 +30,8 @@
             "title": "Statistics",
              "icon": {
                 "name": "fas fa-chart-bar",
-                "backgroundColor": "#ededed",
-                "color": "#5a5b5b"
+                "backgroundColor": "#6932d1",
+                "color": "#fff"
       }
         }
     }
