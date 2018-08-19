@@ -28,11 +28,11 @@
         },
         "flarum-extension": {
             "title": "Statistics",
-             "icon": {
+            "icon": {
                 "name": "fas fa-chart-bar",
                 "backgroundColor": "#6932d1",
                 "color": "#fff"
-      }
+            }
         }
     }
 }
