@@ -19,14 +19,16 @@ export default class StatisticsWidget extends DashboardWidget {
   init() {
     super.init();
 
+    this.statistics = app.forum.attribute('statistics');
+
     // Create a Date object which represents the start of the day in the
     // configured timezone. To do this we convert a UTC time into that timezone,
     // reset to the first hour of the day, and then convert back into UTC time.
     // We'll be working with seconds rather than milliseconds throughout too.
     let today = new Date();
-    today.setTime(today.getTime() + app.data.statistics.timezoneOffset * 1000);
+    today.setTime(today.getTime() + this.statistics.timezoneOffset * 1000);
     today.setUTCHours(0, 0, 0, 0);
-    today.setTime(today.getTime() - app.data.statistics.timezoneOffset * 1000);
+    today.setTime(today.getTime() - this.statistics.timezoneOffset * 1000);
     today = today / 1000;
 
     this.entities = ['users', 'discussions', 'posts'];
@@ -99,7 +101,7 @@ export default class StatisticsWidget extends DashboardWidget {
       return;
     }
 
-    const offset = app.data.statistics.timezoneOffset;
+    const offset = this.statistics.timezoneOffset;
     const period = this.periods[this.selectedPeriod];
     const periodLength = period.end - period.start;
     const labels = [];
@@ -156,11 +158,11 @@ export default class StatisticsWidget extends DashboardWidget {
   }
 
   getTotalCount(entity) {
-    return app.data.statistics[entity].total;
+    return this.statistics[entity].total;
   }
 
   getPeriodCount(entity, period) {
-    const timed = app.data.statistics[entity].timed;
+    const timed = this.statistics[entity].timed;
     let count = 0;
 
     for (const time in timed) {

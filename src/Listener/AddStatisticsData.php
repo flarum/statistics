@@ -13,10 +13,13 @@ namespace Flarum\Statistics\Listener;
 
 use DateTime;
 use DateTimeZone;
+use Flarum\Api\Controller\ShowForumController;
+use Flarum\Api\Event\Serializing;
+use Flarum\Api\Event\WillSerializeData;
+use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Discussion\Discussion;
 use Flarum\Post\Post;
 use Flarum\User\User;
-use Flarum\Frontend\Event\Rendering;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -41,19 +44,19 @@ class AddStatisticsData
      */
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(Rendering::class, [$this, 'addStatisticsData']);
+        $events->listen(Serializing::class, [$this, 'addStatisticsData']);
     }
 
     /**
-     * @param Rendering $event
+     * @param Serializing $event
      */
-    public function addStatisticsData(Rendering $event)
+    public function addStatisticsData(Serializing $event)
     {
-        if ($event->isAdmin()) {
-            $event->view->setVariable('statistics', array_merge(
+        if ($event->isSerializer(ForumSerializer::class) && $event->actor->isAdmin()) {
+            $event->attributes['statistics'] = array_merge(
                 $this->getStatistics(),
                 ['timezoneOffset' => $this->getUserTimezone()->getOffset(new DateTime)]
-            ));
+            );
         }
     }
 
