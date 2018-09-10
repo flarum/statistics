@@ -11,9 +11,9 @@ import DashboardWidget from 'flarum/components/DashboardWidget';
 import SelectDropdown from 'flarum/components/SelectDropdown';
 import Button from 'flarum/components/Button';
 import icon from 'flarum/helpers/icon';
-import listItems from 'flarum/helpers/listItems';
-import ItemList from 'flarum/utils/ItemList';
 import abbreviateNumber from 'flarum/utils/abbreviateNumber';
+
+import * as frappe from 'frappe-charts/dist/frappe-charts.esm.js';
 
 export default class StatisticsWidget extends DashboardWidget {
   init() {
@@ -59,7 +59,7 @@ export default class StatisticsWidget extends DashboardWidget {
                   active={period === this.selectedPeriod}
                   onclick={this.changePeriod.bind(this, period)}
                   icon={period === this.selectedPeriod ? 'fas fa-check' : true}>
-                  {app.translator.trans('flarum-statistics.admin.statistics.'+period+'_label')}
+                  {app.translator.trans(`flarum-statistics.admin.statistics.${period}_label`)}
                 </Button>
               ))}
             </SelectDropdown>
@@ -126,25 +126,21 @@ export default class StatisticsWidget extends DashboardWidget {
       lastPeriod.push(this.getPeriodCount(this.selectedEntity, {start: i - periodLength, end: i - periodLength + period.step}));
     }
 
-    const datasets = [
-      {values: lastPeriod},
-      {values: thisPeriod}
-    ];
+    const datasets = [ { values: lastPeriod }, { values: thisPeriod } ];
 
     if (!context.chart) {
-      context.chart = new Chart({
-        parent: elm,
-        data: {labels, datasets},
+      context.chart = new frappe.Chart(elm, {
+        data: { labels, datasets },
         type: 'line',
         height: 200,
-        x_axis_mode: 'tick',
-        y_axis_mode: 'span',
-        is_series: 1,
-        show_dots: 0,
+        axisOptions: {
+          xAxisMode: 'tick',
+          yAxisMode: 'span',
+        },
         colors: ['rgba(127, 127, 127, 0.2)', app.forum.attribute('themePrimaryColor')]
       });
     } else {
-      context.chart.update_values(datasets, labels);
+      context.chart.update(data);
     }
 
     context.entity = this.selectedEntity;
