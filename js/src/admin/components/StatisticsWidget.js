@@ -129,17 +129,18 @@ export default class StatisticsWidget extends DashboardWidget {
     }
 
     const datasets = [ { values: lastPeriod }, { values: thisPeriod } ];
+    const data = { labels, datasets };
 
     if (!context.chart) {
       context.chart = new frappe.Chart(elm, {
-        data: { labels, datasets },
+        data: data,
         type: 'line',
         height: 200,
         axisOptions: {
           xAxisMode: 'tick',
           yAxisMode: 'span',
         },
-        colors: ['rgba(127, 127, 127, 0.2)', app.forum.attribute('themePrimaryColor')]
+        colors: ['#7f7f7f33', app.forum.attribute('themePrimaryColor')]
       });
     } else {
       context.chart.update(data);
