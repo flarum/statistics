@@ -95,7 +95,7 @@ export default class StatisticsWidget extends DashboardWidget {
   }
 
   drawChart(vnode) {
-    if (vnode.state.chart && vnode.state.entity === this.selectedEntity && vnode.state.period === this.selectedPeriod) {
+    if (this.chart && this.entity === this.selectedEntity && this.period === this.selectedPeriod) {
       return;
     }
 
@@ -135,8 +135,8 @@ export default class StatisticsWidget extends DashboardWidget {
       datasets
     };
 
-    if (!vnode.state.chart) {
-      vnode.state.chart = new Chart(vnode.dom, {
+    if (!this.chart) {
+      this.chart = new Chart(vnode.dom, {
         data,
         type: 'line',
         height: 280,
@@ -151,11 +151,11 @@ export default class StatisticsWidget extends DashboardWidget {
         colors: ['black', app.forum.attribute('themePrimaryColor')]
       });
     } else {
-      vnode.state.chart.update(data);
+      this.chart.update(data);
     }
 
-    vnode.state.entity = this.selectedEntity;
-    vnode.state.period = this.selectedPeriod;
+    this.entity = this.selectedEntity;
+    this.period = this.selectedPeriod;
   }
 
   changeEntity(entity) {
