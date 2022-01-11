@@ -7,7 +7,7 @@ import StatisticsWidget from './components/StatisticsWidget';
 import ItemList from 'flarum/common/utils/ItemList';
 
 app.initializers.add('flarum-statistics', () => {
-  extend(DashboardPage.prototype, 'availableWidgets', function(widgets: ItemList) {
-    widgets.add('statistics', <StatisticsWidget/>, 20);
+  extend(DashboardPage.prototype, 'availableWidgets', function (widgets: ItemList) {
+    widgets.add('statistics', <StatisticsWidget />, 20);
   });
 });
