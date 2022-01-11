@@ -7,11 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import DashboardWidget from 'flarum/components/DashboardWidget';
-import SelectDropdown from 'flarum/components/SelectDropdown';
-import Button from 'flarum/components/Button';
-import icon from 'flarum/helpers/icon';
-import abbreviateNumber from 'flarum/utils/abbreviateNumber';
+import app from 'flarum/admin/app';
+import DashboardWidget from 'flarum/admin/components/DashboardWidget';
+import SelectDropdown from 'flarum/common/components/SelectDropdown';
+import Button from 'flarum/common/components/Button';
+import icon from 'flarum/common/helpers/icon';
+import abbreviateNumber from 'flarum/common/utils/abbreviateNumber';
 
 import { Chart } from 'frappe-charts/dist/frappe-charts.esm.js';
 
